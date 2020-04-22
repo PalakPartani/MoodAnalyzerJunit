@@ -5,33 +5,48 @@ import org.junit.Test;
 
 public class MoodAnalyzerTest {
 
+
     @Test
-    public void givenHappyMood_ShouldReturnHappy() {
-
-        MoodAnalyzer moodanalyzer = new MoodAnalyzer("I am in happy mood ");
-        String mood = moodanalyzer.analyzeMood();
-        Assert.assertEquals("HAPPY", mood);
-
+    public void givenHappyMoodShouldReturnHappy() {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in Happy Mood");
+        try {
+            String mood = moodAnalyzer.analyzeMood();
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalyzerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void givenSadMood_Should_ReturnSad() {
-        MoodAnalyzer moodanalyzer = new MoodAnalyzer("I am in sad mood ");
-        String mood = moodanalyzer.analyzeMood();
-        Assert.assertEquals("SAD", mood);
+    public void givenSadMoodShouldReturnSad() {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in Sad Mood");
+        try {
+            String mood = moodAnalyzer.analyzeMood();
+            Assert.assertEquals("SAD", mood);
+        } catch (MoodAnalyzerException e) {
+            e.printStackTrace();
+        }
     }
 
+
+    @Test
+    public void givenNullMood_ShouldReturnMessage1() throws MoodAnalyzerException {
+        MoodAnalyzer moodanalyzer = new MoodAnalyzer(null);
+        try {
+            moodanalyzer.analyzeMood();
+        } catch (NullPointerException ex) {
+            Assert.assertEquals("This mood is invalid!", ex.getMessage());
+        }
+    }
     @Test
     public void givenNullMood_ShouldReturnMessage() {
-        MoodAnalyzer moodanalyzer = new MoodAnalyzer(null);
 
         try {
 
-            moodanalyzer.analyzeMood();
-
-        } catch (NullPointerException ex) {
-            Assert.assertEquals("HAPPY", ex.getMessage());
-
+            MoodAnalyzer moodanalyzer = new MoodAnalyzer();
+             moodanalyzer.analyzeMood();
+        } catch (MoodAnalyzerException ex) {
+            Assert.assertEquals(MoodAnalyzerException.moodException.ENTERED_NULL, ex.type);
         }
     }
 }
