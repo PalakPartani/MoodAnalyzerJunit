@@ -49,4 +49,15 @@ public class MoodAnalyzerTest {
             Assert.assertEquals(MoodAnalyzerException.moodException.ENTERED_NULL, ex.type);
         }
     }
+    @Test
+    public void givenEmptyMood_ShouldReturnMessage() {
+
+        try {
+            MoodAnalyzer moodanalyzer = new MoodAnalyzer("");
+            String mood = moodanalyzer.analyzeMood();
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalyzerException ex) {
+            Assert.assertEquals(MoodAnalyzerException.moodException.ENTERED_EMPTY,ex.type);
+        }
+    }
 }
