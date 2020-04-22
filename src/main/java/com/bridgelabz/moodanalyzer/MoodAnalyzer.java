@@ -14,7 +14,7 @@ public class MoodAnalyzer {
             }
             return "SAD";
         } catch (NullPointerException e) {
-            throw new NullPointerException(e.getMessage());
+            return "HAPPY";
         }
     }
 }
