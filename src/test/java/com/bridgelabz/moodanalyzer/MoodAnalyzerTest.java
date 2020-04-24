@@ -94,8 +94,7 @@ public class MoodAnalyzerTest {
     //4.1
     @Test
     public void givenMoodAnalyzerClassWithDefaultConstructor_WhenProper_ShouldReturnObjectEqual() {
-        MoodAnalyzer moodAnalyzerFactory = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory("I am in Happy mood");
-        Assert.assertEquals(new MoodAnalyzer("I am in Happy mood"), moodAnalyzerFactory);
+        MoodAnalyzer moodAnalyzerFactory = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory();
+        Assert.assertEquals(new MoodAnalyzer(), moodAnalyzerFactory);
     }
-
 }

@@ -4,7 +4,7 @@ public class MoodAnalyzer {
     private String message;
 
     public MoodAnalyzer() {
-        message="default";
+        message = "default";
     }
 
     public MoodAnalyzer(String message) {
