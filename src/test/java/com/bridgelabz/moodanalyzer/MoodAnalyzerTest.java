@@ -91,10 +91,20 @@ public class MoodAnalyzerTest {
         }
     }
 
-    //4.1
+    //tc4.1
     @Test
     public void givenMoodAnalyzerClassWithDefaultConstructor_WhenProper_ShouldReturnObjectEqual() {
         MoodAnalyzer moodAnalyzerFactory = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory();
         Assert.assertEquals(new MoodAnalyzer(), moodAnalyzerFactory);
+    }
+
+    //tc4.2
+    @Test
+    public void givenClassName_WhenImproper_ShouldThrowMoodAnalyzerException() {
+        try {
+            MoodAnalyzerFactory.getConstructor("com.brigdelabz.moodanalyzer.MoodAnalyzer1", String.class);
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_CLASS, e.type);
+        }
     }
 }
