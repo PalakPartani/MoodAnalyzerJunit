@@ -107,4 +107,14 @@ public class MoodAnalyzerTest {
             Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_CLASS, e.type);
         }
     }
+
+    //tc 4.3
+    @Test
+    public void givenConstructorName_WhenImproper_ShouldReturnMoodAnalyzerException() {
+        try {
+            MoodAnalyzerFactory.getConstructor("com.bridgelabz.moodanalyzer.MoodAnalyzer", Integer.class);
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_METHOD, e.type);
+        }
+    }
 }
