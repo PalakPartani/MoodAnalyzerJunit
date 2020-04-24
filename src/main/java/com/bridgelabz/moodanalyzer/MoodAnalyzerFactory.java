@@ -33,4 +33,15 @@ public class MoodAnalyzerFactory {
             throw new MoodAnalyzerException(MoodAnalyzerException.moodException.NO_SUCH_METHOD, e.getMessage());
         }
     }
+
+    public static MoodAnalyzer createMoodAnalyzerUsingFactory(String message) {
+        try {
+            Constructor constructor = Class.forName("com.bridgelabz.moodanalyzer.MoodAnalyzer").getConstructor(String.class);
+            MoodAnalyzer reflectionMood = (MoodAnalyzer) constructor.newInstance(message);
+            return reflectionMood;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
