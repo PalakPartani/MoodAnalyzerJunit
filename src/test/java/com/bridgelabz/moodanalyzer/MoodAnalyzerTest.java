@@ -139,9 +139,22 @@ public class MoodAnalyzerTest {
     @Test
     public void givenConstructorNameInParameterizedConstructor_WhenImproper_ShouldReturnMoodAnalyzerException() {
         try {
-            MoodAnalyzerFactory.getConstructor("com.bridgelabz.moodanalyzer.MoodAnalyzer", Integer.class);
+            MoodAnalyzerFactory.getConstructor("I am in Happy mood", Integer.class);
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_METHOD, e.type);
+        }
+    }
+
+    //tc 6.1
+
+    @Test
+    public void givenHappyMessageUsingReflection_WhenProper_ShouldReturnHappyMood() {
+        try {
+            MoodAnalyzer moodObject = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory("I am in Happy mood");
+            String mood = MoodAnalyzerFactory.invokeMethod(moodObject, "analyseMood");
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalyzerException e) {
+            e.printStackTrace();
         }
     }
 }
