@@ -127,7 +127,7 @@ public class MoodAnalyzerTest {
 
     //tc5.2
     @Test
-    public void givenClassNameInParameterized_WhenImproper_ShouldThrowMoodAnalyzerException() {
+    public void givenClassNameInParameterizedConstructor_WhenImproper_ShouldThrowMoodAnalyzerException() {
         try {
             MoodAnalyzerFactory.getConstructor("com.brigdelabz.moodanalyzer.MoodAnalyzer1", String.class);
         } catch (MoodAnalyzerException e) {
@@ -135,4 +135,13 @@ public class MoodAnalyzerTest {
         }
     }
 
+    //tc 5.3
+    @Test
+    public void givenConstructorNameInParameterizedConstructor_WhenImproper_ShouldReturnMoodAnalyzerException() {
+        try {
+            MoodAnalyzerFactory.getConstructor("com.bridgelabz.moodanalyzer.MoodAnalyzer", Integer.class);
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_METHOD, e.type);
+        }
+    }
 }
