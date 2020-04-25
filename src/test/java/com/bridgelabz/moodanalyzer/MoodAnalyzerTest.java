@@ -157,4 +157,16 @@ public class MoodAnalyzerTest {
             e.printStackTrace();
         }
     }
+
+    //tc 6.2
+
+    @Test
+    public void givenHappyMessageUsingReflection_WhenImProper_ShouldThrowException() {
+        try {
+            MoodAnalyzer moodObject = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory("I am in Happy mood");
+            MoodAnalyzerFactory.invokeMethod(moodObject, "analyseMood");
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_METHOD, e.type);
+        }
+    }
 }

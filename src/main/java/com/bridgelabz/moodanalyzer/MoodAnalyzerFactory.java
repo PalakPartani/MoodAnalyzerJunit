@@ -46,12 +46,15 @@ public class MoodAnalyzerFactory {
         }
         return null;
     }
+
     public static String invokeMethod(MoodAnalyzer moodAnalyzer, String methodName) {
         try {
             return (String) moodAnalyzer.getClass().getDeclaredMethod(methodName).invoke(moodAnalyzer);
         } catch (NoSuchMethodException e) {
             throw new MoodAnalyzerException(MoodAnalyzerException.moodException.NO_SUCH_METHOD, e.getMessage());
-        } catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;
