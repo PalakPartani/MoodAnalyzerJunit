@@ -124,4 +124,15 @@ public class MoodAnalyzerTest {
         MoodAnalyzer mood = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory("I am in Happy mood");
         Assert.assertEquals(new MoodAnalyzer("I am in Happy mood"), mood);
     }
+
+    //tc5.2
+    @Test
+    public void givenClassNameInParameterized_WhenImproper_ShouldThrowMoodAnalyzerException() {
+        try {
+            MoodAnalyzerFactory.getConstructor("com.brigdelabz.moodanalyzer.MoodAnalyzer1", String.class);
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_CLASS, e.type);
+        }
+    }
+
 }

@@ -3,6 +3,7 @@ package com.bridgelabz.moodanalyzer;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+//opn prm
 public class MoodAnalyzerFactory {
     public static MoodAnalyzer createMoodAnalyzerUsingFactory() {
         try {
@@ -23,7 +24,7 @@ public class MoodAnalyzerFactory {
         return null;
     }
 
-    public static Constructor<?> getConstructor(String className, Class constructor) {
+    public static Constructor getConstructor(String className, Class constructor) {
         try {
             Class<?> moodAnalyzer = Class.forName(className);
             return moodAnalyzer.getConstructor(constructor);
