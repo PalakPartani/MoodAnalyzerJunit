@@ -181,4 +181,16 @@ public class MoodAnalyzerTest {
             e.printStackTrace();
         }
     }
+
+    //tc7.2
+    @Test
+    public void givenFieldValueReflection_WhenImproper_ShouldThrowException() {
+
+        MoodAnalyzer moodAnalyzerUsingFactory = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory();
+        try {
+            MoodAnalyzerFactory.invokingField(moodAnalyzerUsingFactory, "I am in Happy mood", "msg");
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_FIELD, e.type);
+        }
+    }̥
 }
