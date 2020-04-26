@@ -14,7 +14,7 @@ public class MoodAnalyzer {
     public String analyzeMood(String message) {
 
         try {
-            if (message.contains("")) {
+            if (message.equals("")) {
                 throw new MoodAnalyzerException(MoodAnalyzerException.moodException.ENTERED_EMPTY, "This is empty");
             } else if (message.contains("Sad")) {
                 return "SAD";

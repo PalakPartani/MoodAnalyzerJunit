@@ -1,8 +1,8 @@
 package com.bridgelabz.moodanalyzer;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 //opn prm
 public class MoodAnalyzerFactory {
@@ -47,7 +47,7 @@ public class MoodAnalyzerFactory {
         return null;
     }
 
-    public static String invokeMethod(MoodAnalyzer moodAnalyzer, String methodName) {
+    public static String invokingMethod(MoodAnalyzer moodAnalyzer, String methodName) {
         try {
             return (String) moodAnalyzer.getClass().getDeclaredMethod(methodName).invoke(moodAnalyzer);
         } catch (NoSuchMethodException e) {
@@ -59,4 +59,22 @@ public class MoodAnalyzerFactory {
         }
         return null;
     }
+
+    public static Object invokingField(Object moodAnalyzer, String message, String fieldName){
+        try {
+
+            Field field = moodAnalyzer.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(moodAnalyzer, message);
+            return moodAnalyzer.getClass().getDeclaredMethod("analyzeMood").invoke(moodAnalyzer);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new MoodAnalyzerException(MoodAnalyzerException.moodException.NO_SUCH_FIELD, e.getMessage());
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            throw new MoodAnalyzerException(MoodAnalyzerException.moodException.FIELD_INVOCATION_ISSUE, e.getMessage());
+        }
+        return null;
+    }
 }
+

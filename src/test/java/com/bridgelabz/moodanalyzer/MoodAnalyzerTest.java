@@ -139,7 +139,7 @@ public class MoodAnalyzerTest {
     @Test
     public void givenConstructorNameInParameterizedConstructor_WhenImproper_ShouldReturnMoodAnalyzerException() {
         try {
-            MoodAnalyzerFactory.getConstructor("I am in Happy mood", Integer.class);
+            MoodAnalyzerFactory.getConstructor("com.bridgelabz.moodanalyzer.MoodAnalyzer", int.class);
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_METHOD, e.type);
         }
@@ -151,7 +151,7 @@ public class MoodAnalyzerTest {
     public void givenHappyMessageUsingReflection_WhenProper_ShouldReturnHappyMood() {
         try {
             MoodAnalyzer moodObject = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory("I am in Happy mood");
-            String mood = MoodAnalyzerFactory.invokeMethod(moodObject, "analyseMood");
+            String mood = MoodAnalyzerFactory.invokingMethod(moodObject, "analyzeMood");
             Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalyzerException e) {
             e.printStackTrace();
@@ -164,9 +164,21 @@ public class MoodAnalyzerTest {
     public void givenHappyMessageUsingReflection_WhenImProper_ShouldThrowException() {
         try {
             MoodAnalyzer moodObject = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory("I am in Happy mood");
-            MoodAnalyzerFactory.invokeMethod(moodObject, "analyseMood");
+            MoodAnalyzerFactory.invokingMethod(moodObject, "analyseMood");
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_METHOD, e.type);
+        }
+    }
+
+    //tc7.1
+    @Test
+    public void givenFieldValueReflection_WhenProper_ShouldReturnValue() {
+        MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory();
+        try {
+            String mood = (String) MoodAnalyzerFactory.invokingField(moodAnalyzer, "I am in Happy Mood", "message");
+            Assert.assertEquals("HAPPY", mood);
+        } catch (MoodAnalyzerException e) {
+            e.printStackTrace();
         }
     }
 }
