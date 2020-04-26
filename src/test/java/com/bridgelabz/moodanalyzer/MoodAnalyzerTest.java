@@ -175,7 +175,7 @@ public class MoodAnalyzerTest {
     public void givenFieldValueReflection_WhenProper_ShouldReturnValue() {
         MoodAnalyzer moodAnalyzer = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory();
         try {
-            String mood = (String) MoodAnalyzerFactory.invokingField(moodAnalyzer, "I am in Happy Mood", "message");
+            String mood = (String) MoodAnalyzerFactory.invokingField(moodAnalyzer, "I am in Happy Mood", "message", "analyzeMood");
             Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalyzerException e) {
             e.printStackTrace();
@@ -188,7 +188,7 @@ public class MoodAnalyzerTest {
 
         MoodAnalyzer moodAnalyzerUsingFactory = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory();
         try {
-            MoodAnalyzerFactory.invokingField(moodAnalyzerUsingFactory, "I am in Happy mood", "msg");
+            MoodAnalyzerFactory.invokingField(moodAnalyzerUsingFactory, "I am in Happy mood", "msg", "analyzeMood");
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_FIELD, e.type);
         }
@@ -201,11 +201,10 @@ public class MoodAnalyzerTest {
         MoodAnalyzer moodAnalyzerUsingFactory = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory();
 
         try {
-            MoodAnalyzerFactory.invokingField(moodAnalyzerUsingFactory, null, "message");
+            MoodAnalyzerFactory.invokingField(moodAnalyzerUsingFactory, null, "message", "analyzeMood");
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals(MoodAnalyzerException.moodException.FIELD_INVOCATION_ISSUE, e.type);
         }
 
     }
-
 }

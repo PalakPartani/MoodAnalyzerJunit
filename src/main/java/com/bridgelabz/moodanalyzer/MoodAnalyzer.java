@@ -29,10 +29,22 @@ public class MoodAnalyzer {
         return analyzeMood(this.message);
     }
 
-    @Override
+/*    @Override
     public boolean equals(Object that) {
         if (this.message.equals(((MoodAnalyzer) that).message))
             return true;
         return false;
+    }*/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MoodAnalyzer mood = (MoodAnalyzer) o;
+        return message == mood.message &&
+                message.equals(mood.message);
     }
 }
