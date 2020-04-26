@@ -60,16 +60,16 @@ public class MoodAnalyzerFactory {
         return null;
     }
 
-    public static Object invokingField(Object moodAnalyzer, String message, String fieldName){
+    public static Object invokingField(Object moodAnalyzer, String message, String fieldName) {
         try {
 
             Field field = moodAnalyzer.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
             field.set(moodAnalyzer, message);
             return moodAnalyzer.getClass().getDeclaredMethod("analyzeMood").invoke(moodAnalyzer);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (NoSuchFieldException e) {
             throw new MoodAnalyzerException(MoodAnalyzerException.moodException.NO_SUCH_FIELD, e.getMessage());
-        } catch (NoSuchMethodException e) {
+        } catch (IllegalAccessException | NoSuchMethodException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             throw new MoodAnalyzerException(MoodAnalyzerException.moodException.FIELD_INVOCATION_ISSUE, e.getMessage());
@@ -77,4 +77,5 @@ public class MoodAnalyzerFactory {
         return null;
     }
 }
+
 

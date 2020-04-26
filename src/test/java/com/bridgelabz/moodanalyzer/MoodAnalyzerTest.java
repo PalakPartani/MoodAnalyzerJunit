@@ -192,5 +192,20 @@ public class MoodAnalyzerTest {
         } catch (MoodAnalyzerException e) {
             Assert.assertEquals(MoodAnalyzerException.moodException.NO_SUCH_FIELD, e.type);
         }
-    }̥
+    }
+
+    //tc7.3
+
+    @Test
+    public void givenNullValueUsingReflection_WhenProper_ShouldThrowException() {
+        MoodAnalyzer moodAnalyzerUsingFactory = MoodAnalyzerFactory.createMoodAnalyzerUsingFactory();
+
+        try {
+            MoodAnalyzerFactory.invokingField(moodAnalyzerUsingFactory, null, "message");
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.moodException.FIELD_INVOCATION_ISSUE, e.type);
+        }
+
+    }
+
 }
